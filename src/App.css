@@ -1,0 +1,185 @@
+@import url("https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap");
+
+:root {
+  --bg: #fde8ef;        /* soft pink page */
+  --note: #fff8c6;      /* sticky-note yellow */
+  --pink: #f06f9b;
+  --pink-dark: #d9507f;
+  --green: #bfe6c8;     /* pastel green lines */
+  --green-dark: #8fcca0;
+  --ink: #5a3a4a;
+  --done: #c4a9b4;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 16px;
+  background: var(--bg);
+  font-family: "Patrick Hand", "Comic Sans MS", cursive, sans-serif;
+  color: var(--ink);
+}
+
+/* ---------- Sticky note: small, centered ---------- */
+.container {
+  position: relative;
+  width: 100%;
+  max-width: 380px ;
+  min-height: 320px;
+  margin: 48px auto ;
+  padding: 0 0 24px ;
+  background: var(--note);
+  border-radius: 6px 6px 22px 6px;
+  box-shadow: 0 10px 24px rgba(240, 111, 155, 0.25);
+  transform: rotate(-1deg);
+}
+
+/* Little pastel tape on top */
+.container::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  width: 90px;
+  height: 26px;
+  background: rgba(191, 230, 200, 0.8);
+  transform: translateX(-50%) rotate(-3deg);
+  border-radius: 3px;
+}
+
+/* ---------- Title + soft green line ---------- */
+.container > h2 {
+  margin: 0 ;
+  padding: 28px 16px 0;
+  text-align: center;
+  font-size: 38px;
+  font-weight: 400;
+  color: var(--pink);
+}
+.container > h2::after {
+  content: "";
+  display: block;
+  width: 65%;
+  height: 6px;
+  margin: 10px auto 0;
+  background: var(--green);
+  border-radius: 999px;
+}
+
+/* Remove Bootstrap's negative gutters inside the note */
+.container .row {
+  --bs-gutter-x: 0;
+  margin: 0;
+}
+
+/* ---------- Add a task ---------- */
+.enterTask {
+  padding: 18px 20px 6px;
+}
+.enterTask > .col {
+  flex: 0 0 100%;
+  display: flex;
+  gap: 8px;
+}
+.todo-iput {
+  flex: 1;
+  min-width: 0;
+  padding: 8px 14px;
+  border: 2px solid var(--green);
+  border-radius: 999px;
+  background: #fff;
+  font: inherit;
+  font-size: 18px;
+  color: var(--ink);
+}
+.todo-iput::placeholder {
+  color: var(--done);
+}
+.todo-iput:focus {
+  outline: none;
+  border-color: var(--green-dark);
+}
+.enterTask .btn-primary {
+  --bs-btn-bg: var(--pink);
+  --bs-btn-border-color: var(--pink);
+  --bs-btn-hover-bg: var(--pink-dark);
+  --bs-btn-hover-border-color: var(--pink-dark);
+  --bs-btn-active-bg: var(--pink-dark);
+  --bs-btn-active-border-color: var(--pink-dark);
+  border-radius: 999px;
+  padding: 6px 18px;
+  font: inherit;
+  font-size: 18px;
+}
+
+/* ---------- Task list: each task underlined in pastel green ---------- */
+.enterTask ul {
+  flex: 0 0 100%;
+  margin: 12px 0 0;
+  padding: 0;
+}
+.enterTask ul .row {
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 3px solid var(--green);
+}
+.enterTask li {
+  list-style: none;
+  font-size: 20px;
+  line-height: 1.2;
+  word-break: break-word;
+  cursor: pointer;
+}
+
+/* Done task */
+.enterTask li.done {
+  color: var(--done);
+  text-decoration: line-through;
+  text-decoration-color: var(--pink);
+}
+
+/* Checkbox: white box with a pink tick when checked */
+.enterTask .todo-check {
+  appearance: none;
+  -webkit-appearance: none;
+  display: block;
+  width: 22px;
+  height: 22px;
+  margin: 0 auto;
+  border: 2px solid var(--pink);
+  border-radius: 6px;
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 14px;
+  cursor: pointer;
+}
+.enterTask .todo-check:checked {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5l3.2 3.2L13 4.5' fill='none' stroke='%23f06f9b' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+.enterTask .todo-check:focus-visible {
+  outline: 2px solid var(--green-dark);
+  outline-offset: 2px;
+}
+
+/* Delete X */
+.enterTask .col-2 span {
+  display: block;
+  text-align: center;
+  font-size: 20px;
+  color: var(--pink);
+  cursor: pointer;
+}
+.enterTask .col-2 span:hover {
+  color: var(--pink-dark);
+}
+
+/* ---------- Small screens ---------- */
+@media (max-width: 420px) {
+  .container {
+    margin: 32px auto !important;
+  }
+  .container > h2 {
+    font-size: 32px;
+  }
+}
